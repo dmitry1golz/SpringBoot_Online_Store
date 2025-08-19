@@ -1,4 +1,5 @@
-# SpringBoot
+# SpringBoot Test store App
+
 Test API + SpringBoot app
 
 Welcome to my page on GitHub! 

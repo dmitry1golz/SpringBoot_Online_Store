@@ -9,8 +9,7 @@ public class SpringStoreApplication {
 
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(SpringStoreApplication.class, args);
-        var userService = context.getBean(UserService.class);
-        userService.registerUser(new User(1L, "dmitryGolz@gmail.com", "Dmitry Golz", "12345678" ));
+
 
     }
 

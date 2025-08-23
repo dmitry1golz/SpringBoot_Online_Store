@@ -9,3 +9,7 @@ stripe:
   supported-currencies: EUR, USD, GBR
 
 payment-service: stripe
+
+mail:
+  host: https://smtp.gmail.com
+  port: 5761

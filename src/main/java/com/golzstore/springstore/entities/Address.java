@@ -1,13 +1,16 @@
 package com.golzstore.springstore.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 
 @Setter
 @Getter
 @Entity
+@ToString
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "addresses")
 public class Address {
     @Id
@@ -25,4 +28,9 @@ public class Address {
 
     @Column(nullable = false, name = "state")
     private String state;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @ToString.Exclude
+    private User user;
 }

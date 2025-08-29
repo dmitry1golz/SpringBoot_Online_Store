@@ -6,14 +6,5 @@ spring:
     username: root
     password: IRof1Jon7Ohf4Rm7
 
-stripe:
-  apiUrl: https://api.stripe.com
-  enabled: true
-  timeout: 3000
-  supported-currencies: EUR, USD, GBR
-
-payment-service: stripe
-
-mail:
-  host: https://smtp.gmail.com
-  port: 5761
+  jpa:
+    show-sql: true

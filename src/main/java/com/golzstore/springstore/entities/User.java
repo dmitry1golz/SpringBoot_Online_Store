@@ -31,11 +31,11 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
     @Builder.Default
     private List<Address> addresses = new ArrayList<>();
 
-    public void addAddress(Address address) {
+    public void  addAddress(Address address) {
         this.addresses.add(address);
         address.setUser(this);
     }
@@ -60,7 +60,7 @@ public class User {
     @Builder.Default
     private Set<Tag> tags = new HashSet<>();
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user",  cascade = CascadeType.REMOVE)
     private Profile profile;
 
     @ManyToMany()
@@ -70,4 +70,8 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
     private Set<Product> wishlist = new HashSet<>();
+
+    public void addInWishlist(Product product) {
+        wishlist.add(product);
+    }
 }

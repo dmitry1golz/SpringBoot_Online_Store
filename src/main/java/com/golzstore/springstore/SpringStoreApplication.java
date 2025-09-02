@@ -14,7 +14,6 @@ public class SpringStoreApplication {
         ApplicationContext context = SpringApplication.run(SpringStoreApplication.class, args);
         var service = context.getBean(UserService.class);
 
-        service.fetchProductsBySpecifications("prod", BigDecimal.valueOf(2), BigDecimal.valueOf(10));
     }
 
 }

@@ -34,44 +34,29 @@ public class User {
     @Builder.Default
     private List<Address> addresses = new ArrayList<>();
 
-    public void  addAddress(Address address) {
-        this.addresses.add(address);
+    public void addAddress(Address address) {
+        addresses.add(address);
         address.setUser(this);
     }
 
-    public void removeAdress(Address address) {
-        this.addresses.remove(address);
+    public void removeAddress(Address address) {
+        addresses.remove(address);
         address.setUser(null);
     }
 
-    public void addTags(String tagName) {
-        var tag = new Tag(tagName);
-        tags.add(tag);
-        tag.getUsers().add(this);
-    }
-
-    @ManyToMany
-    @JoinTable(
-            name = "user_tags",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "tag_id")
-    )
-    @Builder.Default
-    private Set<Tag> tags = new HashSet<>();
-
-    @OneToOne(mappedBy = "user",  cascade = CascadeType.REMOVE)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE)
     private Profile profile;
 
-    @ManyToMany()
+    @ManyToMany
     @JoinTable(
             name = "wishlist",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
-    private Set<Product> wishlist = new HashSet<>();
+    private Set<Product> favoriteProducts = new HashSet<>();
 
-    public void addInWishlist(Product product) {
-        wishlist.add(product);
+    public void addFavoriteProduct(Product product) {
+        favoriteProducts.add(product);
     }
 
     @Override

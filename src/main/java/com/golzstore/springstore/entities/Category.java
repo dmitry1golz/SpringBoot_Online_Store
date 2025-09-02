@@ -1,15 +1,17 @@
 package com.golzstore.springstore.entities;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Getter
 @Setter
-@Entity
 @NoArgsConstructor
+@Entity
 @Table(name = "categories")
 public class Category {
     @Id
@@ -26,8 +28,8 @@ public class Category {
     public Category(String name) {
         this.name = name;
     }
-    public Category(Byte id) {
+
+    public Category(byte id) {
         this.id = id;
     }
-
 }

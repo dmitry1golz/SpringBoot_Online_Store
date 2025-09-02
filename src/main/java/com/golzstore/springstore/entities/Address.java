@@ -3,30 +3,30 @@ package com.golzstore.springstore.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-
-@Setter
-@Getter
-@Entity
-@ToString
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@Getter
+@Setter
+@Entity
 @Table(name = "addresses")
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
-    @Column(nullable = false, name = "street")
+    @Column(name = "street")
     private String street;
 
-    @Column(nullable = false, name = "city")
+    @Column(name = "city")
     private String city;
 
-    @Column(nullable = false, name = "zip")
+    @Column(name = "zip")
     private String zip;
 
-    @Column(nullable = false, name = "state")
+    @Column(name = "state")
     private String state;
 
     @ManyToOne(fetch = FetchType.LAZY)

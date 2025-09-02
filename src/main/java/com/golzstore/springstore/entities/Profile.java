@@ -5,12 +5,12 @@ import lombok.*;
 
 import java.time.LocalDate;
 
-@Setter
-@Getter
 @Builder
-@ToString
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@Getter
+@Setter
 @Entity
 @Table(name = "profiles")
 public class Profile {
@@ -22,7 +22,7 @@ public class Profile {
     private String bio;
 
     @Column(name = "phone_number")
-    private String phone;
+    private String phoneNumber;
 
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
@@ -30,9 +30,8 @@ public class Profile {
     @Column(name = "loyalty_points")
     private Integer loyaltyPoints;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id")
     @MapsId
-    @ToString.Exclude
     private User user;
 }

@@ -44,26 +44,17 @@ public class User {
         address.setUser(null);
     }
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE)
-    private Profile profile;
-
     @ManyToMany
-    @JoinTable(
-            name = "wishlist",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
-    )
-    private Set<Product> favoriteProducts = new HashSet<>();
+    @JoinTable(name = "wishlist", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
+    @Builder.Default
+    private Set<Product> wishlist = new HashSet<>();
 
-    public void addFavoriteProduct(Product product) {
-        favoriteProducts.add(product);
+    public void addWishlist(Product product) {
+        wishlist.add(product);
     }
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "(" +
-                "id = " + id + ", " +
-                "name = " + name + ", " +
-                "email = " + email + ")";
+        return getClass().getSimpleName() + "(" + "id = " + id + ", " + "name = " + name + ", " + "email = " + email + ")";
     }
 }

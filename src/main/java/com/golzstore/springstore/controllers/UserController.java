@@ -1,5 +1,6 @@
 package com.golzstore.springstore.controllers;
 
+import com.golzstore.springstore.dtos.RegisterUserRequest;
 import com.golzstore.springstore.dtos.UserDto;
 import com.golzstore.springstore.mappers.UserMapper;
 import com.golzstore.springstore.repositories.UserRepository;
@@ -7,7 +8,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.Set;
 
 @RestController
@@ -19,11 +22,13 @@ public class UserController {
     private final UserMapper userMapper;
 
     @GetMapping
-    public Iterable<UserDto> getAllUsers(@RequestParam(required = false, defaultValue = "", name = "sort") String sort) {
-        if (!Set.of("name", "email").contains(sort)) {
-            sort = "name";
-        }
-        return userRepository.findAll(Sort.by(sort))
+    public Iterable<UserDto> getAllUsers(
+            @RequestParam(required = false, defaultValue = "", name = "sort") String sortBy
+    ) {
+        if (!Set.of("name", "email").contains(sortBy))
+            sortBy = "name";
+
+        return userRepository.findAll(Sort.by(sortBy))
                 .stream()
                 .map(userMapper::toDto)
                 .toList();
@@ -39,6 +44,20 @@ public class UserController {
                     .build();
         }
         return ResponseEntity.ok(userMapper.toDto(user));
+    }
+
+    @PostMapping
+    public ResponseEntity<UserDto> createUser(
+            @RequestBody RegisterUserRequest request,
+            UriComponentsBuilder uriBuilder) {
+        var user = userMapper.toEntity(request);
+        userRepository.save(user);
+
+
+        var userDto = userMapper.toDto(user);
+        var uri = uriBuilder.path("/users/{id}").buildAndExpand(userDto.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(userDto);
     }
 
 }

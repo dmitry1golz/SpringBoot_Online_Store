@@ -93,16 +93,6 @@ public class ProductController {
         productRepository.delete(product);
         return ResponseEntity.noContent().build();
     }
-//    @PostMapping("/{id}/change-description")
-//    public ResponseEntity<ProductDto> updateProduct(@PathVariable Long id,
-//                                                    @RequestBody UpdateProductRequest productRequest) {
-//        var product = productRepository.findById(id).orElse(null);
-//        if (product == null) {
-//            return ResponseEntity.notFound().build();
-//        }
-//        product.setDescription(productRequest.getDescription());
-//        productRepository.save(product);
-//        return ResponseEntity.ok(productMapper.toDto(product));
-//    }
+
 
 }

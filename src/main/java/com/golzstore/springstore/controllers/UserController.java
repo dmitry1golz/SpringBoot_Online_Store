@@ -6,6 +6,7 @@ import com.golzstore.springstore.dtos.UpdateUserRequest;
 import com.golzstore.springstore.dtos.UserDto;
 import com.golzstore.springstore.mappers.UserMapper;
 import com.golzstore.springstore.repositories.UserRepository;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
@@ -42,8 +43,9 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserDto> createUser(@RequestBody RegisterUserRequest request,
-                                              UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<UserDto> createUser(
+            @Valid @RequestBody RegisterUserRequest request,
+            UriComponentsBuilder uriBuilder) {
         var user = userMapper.toEntity(request);
         userRepository.save(user);
 
@@ -80,9 +82,7 @@ public class UserController {
     }
 
     @PostMapping("/{id}/change-password")
-    public ResponseEntity<Void> changePassword(
-            @PathVariable Long id,
-            @RequestBody ChangePasswordRequest request) {
+    public ResponseEntity<Void> changePassword(@PathVariable Long id, @RequestBody ChangePasswordRequest request) {
 
         var user = userRepository.findById(id).orElse(null);
         if (user == null) {

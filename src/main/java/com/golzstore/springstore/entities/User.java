@@ -48,7 +48,8 @@ public class User {
     @JoinTable(name = "wishlist",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))
-
+            
+    @Builder.Default
     private Set<Product> wishlist = new HashSet<>();
 
     public void addWishlist(Product product) {

@@ -1,7 +1,6 @@
 package com.golzstore.springstore.repositories;
 
 import com.golzstore.springstore.entities.Cart;
-import jakarta.persistence.Entity;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

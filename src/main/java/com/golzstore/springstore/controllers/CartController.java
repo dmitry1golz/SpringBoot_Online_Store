@@ -5,7 +5,6 @@ import com.golzstore.springstore.dtos.CartDto;
 import com.golzstore.springstore.dtos.CartItemDto;
 import com.golzstore.springstore.dtos.UpdateCartItemRequest;
 import com.golzstore.springstore.entities.Cart;
-import com.golzstore.springstore.entities.CartItem;
 import com.golzstore.springstore.mappers.CartMapper;
 import com.golzstore.springstore.repositories.CartRepository;
 import com.golzstore.springstore.repositories.ProductRepository;
@@ -52,18 +51,10 @@ public class CartController {
             return ResponseEntity.badRequest().build();
         }
 
-        var cartItem = cart.getItems().stream().filter(item -> item.getProduct().getId().equals(product.getId()))
-                           .findFirst().orElse(null);
-        if (cartItem != null) {
-            cartItem.setQuantity(cartItem.getQuantity() + 1);
-        } else {
-            cartItem = new CartItem();
-            cartItem.setProduct(product);
-            cartItem.setQuantity(1);
-            cartItem.setCart(cart);
-            cart.getItems().add(cartItem);
-        }
+        var cartItem = cart.addItem(product);
+
         cartRepository.save(cart);
+
         var cartItemDto = cartMapper.toDto(cartItem);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(cartItemDto);
@@ -80,6 +71,7 @@ public class CartController {
         return ResponseEntity.ok(cartMapper.toDto(cart));
 
     }
+
     @PutMapping("/{cartId}/items/{productId}")
     public ResponseEntity<?> updateItem(
             @PathVariable("cartId") UUID cartId,
@@ -92,9 +84,7 @@ public class CartController {
                     Map.of("error", "Cart not found.")
             );
         }
-        var cartItem = cart.getItems().stream().
-                           filter(item -> item.getProduct().getId().equals(productId))
-                           .findFirst().orElse(null);
+        var cartItem = cart.getItem(productId);
         if (cartItem == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
                     Map.of("error", "Product was not found in the cart.")
@@ -104,6 +94,17 @@ public class CartController {
         cartRepository.save(cart);
         return ResponseEntity.ok(cartMapper.toDto(cartItem));
 
+    }
+    @DeleteMapping("/{cartId}/items")
+    public ResponseEntity<Void> clearCart(
+            @PathVariable UUID cartId) {
+        var cart = cartRepository.getCartWithItems(cartId).orElse(null);
+        if (cart == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        cart.clear();
+        cartRepository.save(cart);
+        return ResponseEntity.noContent().build();
     }
 
 }

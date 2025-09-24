@@ -5,6 +5,7 @@ import com.golzstore.springstore.entities.Product;
 import com.golzstore.springstore.mappers.ProductMapper;
 import com.golzstore.springstore.repositories.CategoryRepository;
 import com.golzstore.springstore.repositories.ProductRepository;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
+@Tag(name = "Products")
 @RequestMapping("/products")
 public class ProductController {
     private final ProductRepository productRepository;

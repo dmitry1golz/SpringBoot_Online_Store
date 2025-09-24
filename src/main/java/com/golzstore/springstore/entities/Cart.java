@@ -56,4 +56,9 @@ public class Cart {
     public void clear() {
         items.clear();
     }
+
+    public void removeItem(Long productId) {
+        var cartItem = getItem(productId);
+        items.remove(cartItem);
+    }
 }

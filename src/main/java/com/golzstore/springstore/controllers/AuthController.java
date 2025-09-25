@@ -5,10 +5,8 @@ import com.golzstore.springstore.dtos.LoginRequest;
 import com.golzstore.springstore.service.JwtService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,15 +21,20 @@ public class AuthController {
     public ResponseEntity<JwtResponse> login(@Valid @RequestBody LoginRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                request.getEmail(),
-                request.getPassword()));
+                        request.getEmail(),
+                        request.getPassword()));
 
         var token = jwtService.generateToken(request.getEmail());
         return ResponseEntity.ok(new JwtResponse(token));
     }
 
-    @ExceptionHandler({BadCredentialsException.class})
-    public ResponseEntity<Void> handleBadCredentialsException() {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    @PostMapping("/validate")
+    public boolean validate(@RequestHeader("Authorization") String authHeader) {
+
+        System.out.println("Validate Called");
+        var token = authHeader.replace("Bearer ", "");
+        return jwtService.validateToken(token);
     }
+
+
 }

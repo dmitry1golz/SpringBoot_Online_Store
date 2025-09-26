@@ -1,6 +1,7 @@
 package com.golzstore.springstore.service;
 
 import com.golzstore.springstore.config.JwtConfig;
+import com.golzstore.springstore.entities.Role;
 import com.golzstore.springstore.entities.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
@@ -29,6 +30,7 @@ public class JwtService {
                    subject(user.getId().toString())
                    .claim("email", user.getEmail())
                    .claim("name", user.getName())
+                   .claim("role", user.getRole())
                    .issuedAt(new Date())
                    .expiration(new Date(System.currentTimeMillis() + 1000 * tokenExpiration))
                    .signWith(jwtConfig.getSecretKey())
@@ -54,5 +56,9 @@ public class JwtService {
 
     public Long getUserIdFromToken(String token) {
         return Long.valueOf(getClaims(token).getSubject());
+    }
+
+    public Role getRoleFromToken(String token) {
+        return Role.valueOf(getClaims(token).get("role", String.class));
     }
 }

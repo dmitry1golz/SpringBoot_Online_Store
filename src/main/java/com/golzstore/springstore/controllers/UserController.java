@@ -4,6 +4,7 @@ import com.golzstore.springstore.dtos.ChangePasswordRequest;
 import com.golzstore.springstore.dtos.RegisterUserRequest;
 import com.golzstore.springstore.dtos.UpdateUserRequest;
 import com.golzstore.springstore.dtos.UserDto;
+import com.golzstore.springstore.entities.Role;
 import com.golzstore.springstore.mappers.UserMapper;
 import com.golzstore.springstore.repositories.UserRepository;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -56,6 +57,7 @@ public class UserController {
 
         var user = userMapper.toEntity(request);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole(Role.USER);
         userRepository.save(user);
 
 

@@ -1,9 +1,6 @@
 package com.golzstore.springstore.controllers;
 
-import com.golzstore.springstore.dtos.AddItemToCartRequest;
-import com.golzstore.springstore.dtos.CartDto;
-import com.golzstore.springstore.dtos.CartItemDto;
-import com.golzstore.springstore.dtos.UpdateCartItemRequest;
+import com.golzstore.springstore.dtos.*;
 import com.golzstore.springstore.exceptions.CartNotFoundException;
 import com.golzstore.springstore.exceptions.ProductNotFoundException;
 import com.golzstore.springstore.service.CartService;
@@ -17,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.Map;
 import java.util.UUID;
 
 
@@ -77,12 +73,15 @@ public class CartController {
 
 
     @ExceptionHandler(CartNotFoundException.class)
-    public ResponseEntity<Map<String, String>> handleCartNotFound() {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", "Cart not found."));
+    public ResponseEntity<ErrorDto> handleCartNotFound() {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new ErrorDto("Cart not found."));
+
     }
 
     @ExceptionHandler(ProductNotFoundException.class)
-    public ResponseEntity<Map<String, String>> handleProductNotFound() {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", "Product not found in the cart."));
+    public ResponseEntity<ErrorDto> handleProductNotFound() {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new ErrorDto("Product not found in the cart."));
     }
 }

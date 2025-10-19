@@ -1,9 +1,6 @@
 package com.golzstore.springstore.controllers;
 
-import com.golzstore.springstore.dtos.ChangePasswordRequest;
-import com.golzstore.springstore.dtos.RegisterUserRequest;
-import com.golzstore.springstore.dtos.UpdateUserRequest;
-import com.golzstore.springstore.dtos.UserDto;
+import com.golzstore.springstore.dtos.*;
 import com.golzstore.springstore.entities.Role;
 import com.golzstore.springstore.mappers.UserMapper;
 import com.golzstore.springstore.repositories.UserRepository;
@@ -48,10 +45,12 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterUserRequest request,
-                                          UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<?> registerUser(
+            @Valid @RequestBody RegisterUserRequest request,
+            UriComponentsBuilder uriBuilder) {
         if (userRepository.existsByEmail(request.getEmail())) {
-            return ResponseEntity.badRequest().body(Map.of("email", "Email is already registered"));
+            return ResponseEntity.badRequest().body(
+                    new ErrorDto("Email is already registered"));
         }
 
 

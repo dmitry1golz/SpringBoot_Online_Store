@@ -61,4 +61,7 @@ public class Cart {
         var cartItem = getItem(productId);
         items.remove(cartItem);
     }
+    public boolean isEmpty() {
+        return items.isEmpty();
+    }
 }

@@ -47,10 +47,13 @@ public class Order {
         order.setTotalPrice(cart.getTotalPrice());
 
         cart.getItems().forEach(item -> {
-            var orderItem = new OrderItem(
-                    order, item.getProduct(), item.getQuantity());
+            var orderItem = new OrderItem(order, item.getProduct(), item.getQuantity());
             order.getItems().add(orderItem);
         });
         return order;
+    }
+
+    public boolean isPlacedBy(User customer) {
+        return this.customer.equals(customer);
     }
 }

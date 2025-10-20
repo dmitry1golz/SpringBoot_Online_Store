@@ -1,12 +1,15 @@
 package com.golzstore.springstore.controllers;
 
+import com.golzstore.springstore.dtos.ErrorDto;
 import com.golzstore.springstore.dtos.OrderDto;
+import com.golzstore.springstore.exceptions.OrderNotFoundException;
 import com.golzstore.springstore.service.OrderService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.AccessDeniedException;
 import java.util.List;
 
 @RestController
@@ -18,5 +21,21 @@ public class OrderController {
     @GetMapping
     public List<OrderDto> getAllOrders() {
         return orderService.getAllOrders();
+    }
+
+    @GetMapping("/orderId")
+    public OrderDto getOrder(@PathVariable Long orderId) {
+        return orderService.getOrder(orderId);
+    }
+
+    @ExceptionHandler(OrderNotFoundException.class)
+    public ResponseEntity<Void> handleOrderNotFound() {
+        return ResponseEntity.notFound().build();
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<ErrorDto> handleAccessDenied(Exception ex) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ErrorDto(ex.getMessage()));
+
     }
 }

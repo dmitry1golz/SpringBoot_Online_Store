@@ -25,7 +25,6 @@ public class Order {
     @JoinColumn(name = "customer_id")
     private User customer;
 
-
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private OrderStatus status;

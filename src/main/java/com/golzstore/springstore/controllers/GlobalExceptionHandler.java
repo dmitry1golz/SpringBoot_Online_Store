@@ -1,6 +1,5 @@
 package com.golzstore.springstore.controllers;
 
-import com.golzstore.springstore.dtos.ErrorDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;

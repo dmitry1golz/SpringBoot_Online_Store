@@ -1,4 +1,4 @@
-package com.golzstore.springstore.auth;
+package com.golzstore.springstore.common;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

@@ -1,6 +1,6 @@
 package com.golzstore.springstore.payments;
 
-import com.golzstore.springstore.controllers.ErrorDto;
+import com.golzstore.springstore.common.ErrorDto;
 import com.golzstore.springstore.carts.CartEmptyException;
 import com.golzstore.springstore.carts.CartNotFoundException;
 import com.golzstore.springstore.orders.OrderRepository;

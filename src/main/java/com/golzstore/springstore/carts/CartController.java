@@ -1,6 +1,6 @@
 package com.golzstore.springstore.carts;
 
-import com.golzstore.springstore.controllers.ErrorDto;
+import com.golzstore.springstore.common.ErrorDto;
 import com.golzstore.springstore.products.ProductNotFoundException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

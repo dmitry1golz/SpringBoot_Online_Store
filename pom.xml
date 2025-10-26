@@ -12,7 +12,7 @@
 
     <groupId>com.golzstore</groupId>
     <artifactId>springstore</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>SpringStore</name>
     <description>Spring Boot Store Application</description>
     <url/>
@@ -30,7 +30,7 @@
     </scm>
 
     <properties>
-        <java.version>22</java.version>
+        <java.version>17</java.version>
         <mapstruct.version>1.6.3</mapstruct.version>
         <lombok.version>1.18.34</lombok.version>
     </properties>

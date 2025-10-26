@@ -1,4 +1,4 @@
-package com.golzstore.springstore.controllers;
+package com.golzstore.springstore.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

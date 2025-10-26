@@ -1,6 +1,6 @@
 package com.golzstore.springstore.orders;
 
-import com.golzstore.springstore.controllers.ErrorDto;
+import com.golzstore.springstore.common.ErrorDto;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

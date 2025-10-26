@@ -1,4 +1,4 @@
-package com.golzstore.springstore.controllers;
+package com.golzstore.springstore.common;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;

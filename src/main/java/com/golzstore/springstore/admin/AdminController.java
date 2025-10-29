@@ -1,4 +1,4 @@
-package com.golzstore.springstore.controllers;
+package com.golzstore.springstore.admin;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

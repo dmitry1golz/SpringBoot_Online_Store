@@ -73,13 +73,13 @@ public class CartController {
     @ExceptionHandler(CartNotFoundException.class)
     public ResponseEntity<ErrorDto> handleCartNotFound() {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(new ErrorDto("Cart not found."));
+                .body(new ErrorDto("This cart is not found."));
 
     }
 
     @ExceptionHandler(ProductNotFoundException.class)
     public ResponseEntity<ErrorDto> handleProductNotFound() {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(new ErrorDto("Product not found in the cart."));
+                .body(new ErrorDto("This product is not found"));
     }
 }

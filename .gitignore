@@ -32,5 +32,15 @@ build/
 ### VS Code ###
 .vscode/
 
+### Visual Studio ###
+.vs/
+
 ## DEV ##
-!**/src/main/**/application-dev.yaml
+**/application-dev.yaml
+
+## JVM crash dumps ##
+hs_err_pid*.log
+replay_pid*.log
+
+## Local tooling ##
+Stripe/

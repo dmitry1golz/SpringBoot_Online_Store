@@ -20,7 +20,7 @@ public class StripePaymentGateway implements PaymentGateway {
     @Value("${websiteUrl}")
     private String websiteUrl;
 
-    @Value("$stripe.webhookSecretKey")
+    @Value("${stripe.webhookSecretKey}")
     private String webhookSecretKey;
 
     @Override

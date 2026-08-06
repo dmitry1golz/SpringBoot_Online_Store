@@ -32,7 +32,7 @@ public class OrderController {
 
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<ErrorDto> handleAccessDenied(Exception ex) {
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ErrorDto(ex.getMessage()));
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ErrorDto("You dont have access to this order."));
 
     }
 }
